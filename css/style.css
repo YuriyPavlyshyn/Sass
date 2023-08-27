@@ -1,0 +1,39 @@
+header {
+  background-color: #fff;
+}
+header .person {
+  font-style: italic;
+}
+header .person p {
+  font-size: smaller;
+}
+
+body {
+  font-size: 16px;
+}
+body div {
+  font-size: 32px;
+}
+body div p {
+  font-size: large;
+}
+body div p span {
+  font-size: larger;
+}
+
+.box {
+  height: 100%;
+  width: 100%;
+}
+.box .item {
+  height: 100%;
+  width: 100%;
+}
+.box .item p {
+  height: 100%;
+  width: 100%;
+}
+.box .item p span {
+  height: 100%;
+  width: 100%;
+}

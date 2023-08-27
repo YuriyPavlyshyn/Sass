@@ -1,0 +1,33 @@
+@import "_header";
+
+
+body {
+    font-size: 16px;
+    div {
+        font-size: 32px;
+        p {
+            font-size: large;
+            span {
+                font-size: larger;
+            }
+        }
+    }
+}
+
+.box {
+    height: 100%;
+    width: 100%;
+    .item {
+        height: 100%;
+        width: 100%;
+        p {
+            height: 100%;
+            width: 100%;
+            span {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+
