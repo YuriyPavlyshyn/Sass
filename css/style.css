@@ -1,3 +1,5 @@
+@charset "UTF-8";
+/* імпорт других файлів стилів */
 header {
   background-color: #fff;
 }
@@ -8,7 +10,9 @@ header .person p {
   font-size: smaller;
 }
 
-body {
+/* підключаємо додатковий файл scss до основного */
+/* ! вкладеності */
+body { /* це вкладеність */
   font-size: 16px;
 }
 body div {
@@ -21,19 +25,74 @@ body div p span {
   font-size: larger;
 }
 
-.box {
-  height: 100%;
-  width: 100%;
+.block { /* потрібно дуже уважно ставитись до побудови ієрархічності елементів в препроцесорі */
+  font-family: fantasy;
 }
-.box .item {
-  height: 100%;
-  width: 100%;
+.block p {
+  font-style: italic;
 }
-.box .item p {
-  height: 100%;
-  width: 100%;
+.block .item {
+  font-size: larger;
 }
-.box .item p span {
-  height: 100%;
-  width: 100%;
+.block .item p {
+  font-weight: 900;
+  color: red;
+}
+
+.block-2 { /* ховер прописується в одному кусочку  - & цей знак вставляється замість назви класу батьківського блоку - .block-2 */
+  font-size: smaller;
+}
+.block-2 .link {
+  font-size: xx-large;
+  color: blue;
+  text-decoration: underline;
+}
+.block-2 .link:hover {
+  color: green;
+}
+
+.link { /* в даному випадку ми в класі для лінків стилізуємо лінку яка знаходиться в конкретному блоці (зі своїм класом) */ }
+.item .link {
+  font-style: italic;
+  font-size: medium;
+  color: purple;
+}
+.item .link:hover {
+  color: green;
+}
+
+/* ! змінні */
+/* тут ми стврюємо значення змінних та їхні назви */
+.variables .first { /* тут ми застосовуємо значення змінних */
+  font-size: 20px;
+  color: red;
+}
+.variables .second {
+  font-size: 20px;
+  color: pink;
+}
+
+/*! Шаблони */
+.templates a { /* тут ми задаємо назву шаблону через "%" */
+  font-size: 30px; /* вказуємо властивості та їх значення */
+  border-bottom: 2px dashed red;
+}
+
+/* ! Міксини */
+h1 {
+  color: darkorchid;
+  background: burlywood;
+}
+
+.mixins a { /* за допомогою @include fontz підключаємо міксини і в дужках вказуємо значення по порядковості */
+  /* тут ми вписуємо назви змінних по порядковості */
+  font-size: 25px; /* тут ми створюємо змінні */
+  color: red;
+  background-color: green;
+}
+
+/* ! точні математичні розрахунки */
+.virtual {
+  width: 29.4117647059%; /* до прикладу ширина нашого екрану 1700 пікселів, даний блок ми хочемо задати в 500 пікселів, однак хочемо визначити його ширину саме у відсотках. ми ділимо ширину блоку на повний розмір екрану та множимо на 100% і цей чудовий препроцесор автоматично здійснює математичний розрахунок та передає вичислені дані в CSS */
+  background-color: darkcyan;
 }

@@ -1,7 +1,8 @@
-@import "_header";
+/* імпорт других файлів стилів */
+@import "header.scss"; /* підключаємо додатковий файл scss до основного */
 
-
-body {
+/* ! вкладеності */
+body {  /* це вкладеність */
     font-size: 16px;
     div {
         font-size: 32px;
@@ -14,20 +15,98 @@ body {
     }
 }
 
-.box {
-    height: 100%;
-    width: 100%;
+.block { /* потрібно дуже уважно ставитись до побудови ієрархічності елементів в препроцесорі */
+    font-family: fantasy;
+    p {
+        font-style: italic;
+    }
     .item {
-        height: 100%;
-        width: 100%;
+        font-size: larger;
         p {
-            height: 100%;
-            width: 100%;
-            span {
-                height: 100%;
-                width: 100%;
-            }
+            font-weight: 900;
+            color: red;
         }
     }
 }
 
+.block-2 { /* ховер прописується в одному кусочку  - & цей знак вставляється замість назви класу батьківського блоку - .block-2 */
+    font-size: smaller;
+    & .link {
+    font-size: xx-large;
+    color: blue;
+    text-decoration: underline;
+    }
+    & .link:hover {
+        color: green;
+    }
+}
+
+.link { /* в даному випадку ми в класі для лінків стилізуємо лінку яка знаходиться в конкретному блоці (зі своїм класом) */
+    .item & {
+        font-style: italic;
+        font-size: medium;
+        color: purple;
+    }
+    .item &:hover {
+        color: green;
+    }
+}
+
+/* ! змінні */
+/* тут ми стврюємо значення змінних та їхні назви */
+$fs: 20px;
+$color_1:red;
+$color_2:pink;
+
+.variables {
+    .first { /* тут ми застосовуємо значення змінних */
+        font-size: $fs;
+        color: $color_1;
+    }
+    .second {
+        font-size: $fs;
+        color: $color_2;
+    }
+}
+
+/*! Шаблони */
+%border-b { /* тут ми задаємо назву шаблону через "%" */
+    font-size: 30px; /* вказуємо властивості та їх значення */
+    border-bottom: 2px dashed red;
+}
+
+.templates {
+    a {
+        @extend %border-b; // через @extend та назву шаблону застосовуємо до елементу 
+    }
+}
+
+/* ! Міксини */
+@mixin fontz($fs, $c, $bgc){ /* тут ми вписуємо назви змінних по порядковості */
+    font-size: $fs; /* тут ми створюємо змінні */
+    color: $c;
+    background-color: $bgc;
+}
+@mixin hcol($h1c, $h1bgc){
+    color: $h1c;
+    background: $h1bgc; 
+}
+
+h1 {
+    @include hcol(darkorchid, burlywood);
+}
+
+.mixins {
+    a { /* за допомогою @include fontz підключаємо міксини і в дужках вказуємо значення по порядковості */
+        @include fontz(25px, red, green)
+    } // значення вказуються у строгій порядковості, яку порушувати не можна ні в якому разі 
+}
+
+/* ! точні математичні розрахунки */
+.virtual {
+    width: 500px / 1700px * 100%; /* до прикладу ширина нашого екрану 1700 пікселів, даний блок ми хочемо задати в 500 пікселів, однак хочемо визначити його ширину саме у відсотках. ми ділимо ширину блоку на повний розмір екрану та множимо на 100% і цей чудовий препроцесор автоматично здійснює математичний розрахунок та передає вичислені дані в CSS */
+    background-color: darkcyan;
+}
+
+
+// Якщо ми хочемо щоб коментар із SCSS не потрапляв до CSS файлу, тоді застосовуємо "//"
